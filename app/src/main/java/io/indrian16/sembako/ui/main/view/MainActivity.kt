@@ -1,25 +1,35 @@
 package io.indrian16.sembako.ui.main.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
 import io.indrian16.sembako.R
 import io.indrian16.sembako.ui.base.view.BaseActivity
 import io.indrian16.sembako.ui.home.view.HomeFragment
 import io.indrian16.sembako.ui.main.presenter.MainPresenter
+import io.indrian16.sembako.ui.scanner.view.ScannerFragment
 import io.indrian16.sembako.ui.setting.view.SettingActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar_navigation.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSelectedListener, HasSupportFragmentInjector {
 
     @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> = dispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +38,7 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
         setUpToolbar()
         setUpDrawerMenu()
         setUpListener()
+        presenter.navHome()
     }
 
     private fun setUpToolbar() {
@@ -39,6 +50,7 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
     private fun setUpListener() {
 
+        fab_scanner.setOnClickListener { presenter.clickScanner() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -51,7 +63,9 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
         when (item?.itemId) {
 
-            R.id.main_search -> presenter.clickRefresh()
+            R.id.main_menu_search -> presenter.clickSearch()
+
+            R.id.main_menu_refresh -> presenter.clickRefresh()
 
         }
 
@@ -97,6 +111,15 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
         drawer_layout.closeDrawers()
         return true
+    }
+
+    @SuppressLint("PrivateResource")
+    override fun goScanner() {
+
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.abc_tooltip_enter, R.anim.abc_tooltip_exit)
+        transaction.replace(R.id.cl_root_view, ScannerFragment.newInstance())
+        transaction.commit()
     }
 
     override fun goSearchView() {

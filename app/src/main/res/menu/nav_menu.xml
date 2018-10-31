@@ -6,7 +6,9 @@
 
         <item
             android:id="@+id/nav_home"
-            android:title="@string/home" />
+            android:title="@string/home"
+            android:checked="true"
+            android:icon="@drawable/house"/>
 
     </group>
 
@@ -17,10 +19,12 @@
 
             <item
                 android:id="@+id/nav_cashier"
-                android:title="@string/cashier" />
+                android:title="@string/cashier"
+                android:icon="@drawable/cashier"/>
             <item
                 android:id="@+id/nav_setting"
-                android:title="@string/setting" />
+                android:title="@string/setting"
+                android:icon="@drawable/settings"/>
 
         </menu>
 

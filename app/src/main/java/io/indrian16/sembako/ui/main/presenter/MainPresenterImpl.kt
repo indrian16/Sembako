@@ -5,6 +5,11 @@ import javax.inject.Inject
 
 class MainPresenterImpl @Inject constructor(private val view: MainView) : MainPresenter {
 
+    override fun clickScanner() {
+
+        view.goScanner()
+    }
+
     override fun clickSearch() {
 
         view.goSearchView()

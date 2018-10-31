@@ -12,4 +12,7 @@
     <string name="cashier">Cashier</string>
     <string name="features">Features</string>
     <string name="refresh">Refresh</string>
+    <string name="no_item">No Item</string>
+    <string name="flash_light">Flash Light</string>
+    <string name="auto_focus">Auto Focus</string>
 </resources>

@@ -27,6 +27,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_scanner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -34,7 +35,7 @@
             android:layout_marginRight="22dp"
             android:layout_marginBottom="22dp"
             android:src="@drawable/barcode_scanner"
-            android:tint="@color/colorPrimaryDark"/>
+            android:tint="@color/colorWhite"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

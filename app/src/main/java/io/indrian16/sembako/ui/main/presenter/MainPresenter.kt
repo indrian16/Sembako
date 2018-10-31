@@ -2,6 +2,8 @@ package io.indrian16.sembako.ui.main.presenter
 
 interface MainPresenter {
 
+    fun clickScanner()
+
     fun clickSearch()
     fun clickRefresh()
 
