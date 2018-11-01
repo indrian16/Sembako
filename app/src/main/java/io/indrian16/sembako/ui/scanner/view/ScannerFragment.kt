@@ -1,15 +1,18 @@
 package io.indrian16.sembako.ui.scanner.view
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.*
 import android.widget.Toast
 import com.google.zxing.Result
 import io.indrian16.sembako.R
+import io.indrian16.sembako.ui.base.view.BaseFragment
+import io.indrian16.sembako.ui.scanner.presenter.ScannerPresenter
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView
+import timber.log.Timber
+import javax.inject.Inject
 
-class ScannerFragment : Fragment(), ScannerView, ZXingScannerView.ResultHandler {
+class ScannerFragment : BaseFragment(), ScannerView, ZXingScannerView.ResultHandler {
 
     companion object {
 
@@ -29,13 +32,15 @@ class ScannerFragment : Fragment(), ScannerView, ZXingScannerView.ResultHandler 
     private var mAutoFocus: Boolean = false
     private var mCameraId = -1
 
-    lateinit var scannerView: ZXingScannerView
+    private lateinit var mScannerView: ZXingScannerView
+
+    @Inject lateinit var presenter: ScannerPresenter
 
     override fun onResume() {
         super.onResume()
-        scannerView.setResultHandler(this)
-        scannerView.startCamera(mCameraId)
-        scannerView.setAutoFocus(mAutoFocus)
+        mScannerView.setResultHandler(this)
+        mScannerView.startCamera(mCameraId)
+        mScannerView.setAutoFocus(mAutoFocus)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +51,7 @@ class ScannerFragment : Fragment(), ScannerView, ZXingScannerView.ResultHandler 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               state: Bundle?): View? {
 
-        scannerView = ZXingScannerView(activity)
+        mScannerView = ZXingScannerView(activity)
 
         if (state != null) {
 
@@ -60,12 +65,13 @@ class ScannerFragment : Fragment(), ScannerView, ZXingScannerView.ResultHandler 
             mCameraId = -1
         }
 
-        return scannerView
+        return mScannerView
     }
 
     override fun handleResult(result: Result?) {
 
         Toast.makeText(context, result.toString(), Toast.LENGTH_LONG).show()
+        Timber.tag(TAG).d(result.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -84,43 +90,68 @@ class ScannerFragment : Fragment(), ScannerView, ZXingScannerView.ResultHandler 
 
                 if (mFlash) {
 
-                    setOnFlashLight(true)
+                    presenter.onFlashLight()
+                    item.setTitle(R.string.flash_light_on)
+
                 } else {
 
-                    setOffFlashLight(false)
+                    presenter.offFlashLight()
+                    item.setTitle(R.string.flash_light_off)
                 }
+
+                return true
             }
+
+            R.id.scanner_menu_auto_focus -> {
+
+                mAutoFocus = !mAutoFocus
+
+                if (mAutoFocus) {
+
+                    presenter.onAutoFocus()
+                    item.setTitle(R.string.auto_focus_on)
+
+                } else {
+
+                    presenter.offAutoFocus()
+                    item.setTitle(R.string.auto_focus_off)
+                }
+
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+
         }
 
-        return super.onOptionsItemSelected(item)
     }
 
     override fun setOnFlashLight(on: Boolean) {
 
         mFlash = on
-        scannerView.flash = mFlash
+        mScannerView.flash = mFlash
     }
 
     override fun setOffFlashLight(off: Boolean) {
 
         mFlash = off
-        scannerView.flash = mFlash
+        mScannerView.flash = mFlash
     }
 
     override fun setOnAutoFocus(on: Boolean) {
 
         mAutoFocus = on
-        scannerView.setAutoFocus(mAutoFocus)
+        mScannerView.setAutoFocus(mAutoFocus)
     }
 
     override fun setOffAutoFocus(off: Boolean) {
 
         mAutoFocus = off
-        scannerView.setAutoFocus(mAutoFocus)
+        mScannerView.setAutoFocus(mAutoFocus)
     }
 
     override fun onPause() {
         super.onPause()
-        scannerView.stopCamera()
+        mScannerView.stopCamera()
     }
 }

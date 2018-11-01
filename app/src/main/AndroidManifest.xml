@@ -4,7 +4,8 @@
     package="io.indrian16.sembako">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
@@ -23,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.setting.view.SettingActivity"/>
+        <activity android:name=".ui.setting.view.SettingActivity" />
+        <activity android:name=".ui.createitem.view.CreateItemActivity"></activity>
     </application>
 
 </manifest>

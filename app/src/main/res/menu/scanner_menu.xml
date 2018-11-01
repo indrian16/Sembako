@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/scanner_menu_flash"
-        android:title="@string/flash_light" />
+        android:title="@string/flash_light_off" />
 
     <item
         android:id="@+id/scanner_menu_auto_focus"
-        android:title="@string/auto_focus" />
+        android:title="@string/auto_focus_on" />
 </menu>

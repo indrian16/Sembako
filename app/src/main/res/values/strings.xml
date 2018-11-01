@@ -13,6 +13,8 @@
     <string name="features">Features</string>
     <string name="refresh">Refresh</string>
     <string name="no_item">No Item</string>
-    <string name="flash_light">Flash Light</string>
-    <string name="auto_focus">Auto Focus</string>
+    <string name="flash_light_off">Flash Light OFF</string>
+    <string name="auto_focus_on">Auto Focus ON</string>
+    <string name="flash_light_on">Flash Light ON</string>
+    <string name="auto_focus_off">Auto Focus OFF</string>
 </resources>
