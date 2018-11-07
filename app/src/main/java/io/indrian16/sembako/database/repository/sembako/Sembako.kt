@@ -10,25 +10,24 @@ data class Sembako(
 
         @PrimaryKey(autoGenerate = true)
         @ColumnInfo(name = "id")
-        var id: Long?,
+        var id: Long? = null,
 
         @ColumnInfo(name = "barcode")
-        var barcode: Int?,
+        var barcode: Int? = null,
 
         @ColumnInfo(name = "title")
-        var title: String?,
+        var title: String? = null,
 
         @ColumnInfo(name = "price")
-        var price: Int?,
+        var price: Int? = null,
 
         @ColumnInfo(name = "stock")
-        var stock: Int?,
+        var stock: Int? = null,
 
         @ColumnInfo(name = "create_at")
-        var createdAt: Date?,
+        var createdAt: Date? = null,
 
         @ColumnInfo(name = "update_at")
-        var updateAt: Date?
+        var updateAt: Date? = null
 
-
-) { constructor() : this(null, null, null, null, null, null, null) }
+)
