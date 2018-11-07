@@ -16,6 +16,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.indrian16.sembako.R
 import io.indrian16.sembako.ui.base.view.BaseActivity
+import io.indrian16.sembako.ui.createitem.view.CreateItemActivity
 import io.indrian16.sembako.ui.home.view.HomeFragment
 import io.indrian16.sembako.ui.main.presenter.MainPresenter
 import io.indrian16.sembako.ui.scanner.view.ScannerFragment
@@ -50,7 +51,10 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
 
     private fun setUpListener() {
 
-        fab_scanner.setOnClickListener { presenter.clickScanner() }
+        fab_scanner.setOnClickListener {
+
+            startActivity(Intent(baseContext, CreateItemActivity::class.java))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,6 +108,13 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
                 menuItem.isChecked = true
             }
 
+
+            R.id.nav_scanner -> {
+
+                presenter.navScanner()
+                menuItem.isEnabled = true
+            }
+
             R.id.nav_cashier -> presenter.navCashier()
 
             R.id.nav_setting -> presenter.navSetting()
@@ -114,29 +125,22 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     }
 
     @SuppressLint("PrivateResource")
-    override fun goScanner() {
+    private fun switchFragment(fragment: Fragment):FragmentTransaction {
 
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.setCustomAnimations(R.anim.abc_tooltip_enter, R.anim.abc_tooltip_exit)
-        transaction.replace(R.id.cl_root_view, ScannerFragment.newInstance())
-        transaction.commit()
+        transaction.replace(R.id.cl_root_view, fragment)
+        return transaction
     }
 
-    override fun goSearchView() {
+    override fun goScanner() {
 
-        Toast.makeText(baseContext, "Search", Toast.LENGTH_LONG).show()
-    }
-
-    override fun refreshItem() {
-
-        Toast.makeText(baseContext, "Refresh", Toast.LENGTH_LONG).show()
+        switchFragment(ScannerFragment.newInstance()).commit()
     }
 
     override fun goHome() {
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.cl_root_view, HomeFragment.newInstance())
-                .commit()
+        switchFragment(HomeFragment.newInstance()).commit()
     }
 
     override fun goCashier() {
@@ -147,5 +151,15 @@ class MainActivity : BaseActivity(), MainView, NavigationView.OnNavigationItemSe
     override fun goSetting() {
 
         startActivity(Intent(baseContext, SettingActivity::class.java))
+    }
+
+    override fun goSearchView() {
+
+        Toast.makeText(baseContext, "Search", Toast.LENGTH_LONG).show()
+    }
+
+    override fun refreshItem() {
+
+        Toast.makeText(baseContext, "Refresh", Toast.LENGTH_LONG).show()
     }
 }

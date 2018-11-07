@@ -24,8 +24,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.setting.view.SettingActivity" />
-        <activity android:name=".ui.createitem.view.CreateItemActivity"></activity>
+        <activity android:name=".ui.setting.view.SettingActivity"
+            android:label="Settings"
+            android:theme="@style/AppTheme.Second"/>
+        <activity
+            android:name=".ui.createitem.view.CreateItemActivity"
+            android:label="Create Item"
+            android:theme="@style/AppTheme.Second"/>
     </application>
 
 </manifest>

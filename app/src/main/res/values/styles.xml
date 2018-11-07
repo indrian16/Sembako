@@ -10,6 +10,14 @@
         <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
     </style>
 
+    <style name="AppTheme.Second" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAppearance">@style/TextAppearance.Text.Regular</item>
+    </style>
+
     <style name="TextAppearance.Text.Regular" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/notoserif_regular</item>
     </style>
@@ -24,6 +32,12 @@
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:fontFamily">@font/notoserif_regular</item>
 
+    </style>
+
+    <style name="TextAppearance.TextInputLayout.Helper" parent="TextAppearance.Design.HelperText">
+
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">16dp</item>
     </style>
 
 </resources>

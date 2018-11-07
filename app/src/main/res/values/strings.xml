@@ -17,4 +17,10 @@
     <string name="auto_focus_on">Auto Focus ON</string>
     <string name="flash_light_on">Flash Light ON</string>
     <string name="auto_focus_off">Auto Focus OFF</string>
+    <string name="scanner">Scanner</string>
+    <string name="barcode">Barcode</string>
+    <string name="title_product">Title Product</string>
+    <string name="price">Price</string>
+    <string name="stock">Stock</string>
+    <string name="create">Create</string>
 </resources>

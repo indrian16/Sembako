@@ -10,6 +10,11 @@
             android:checked="true"
             android:icon="@drawable/house"/>
 
+        <item
+            android:id="@+id/nav_scanner"
+            android:title="@string/scanner"
+            android:icon="@drawable/barcode_scanner"/>
+
     </group>
 
     <item
