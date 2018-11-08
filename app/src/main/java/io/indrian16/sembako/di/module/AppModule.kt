@@ -22,7 +22,9 @@ class AppModule {
     @Singleton
     fun provideAppDatabase(context: Context): AppDatabase =
 
-            Room.databaseBuilder(context, AppDatabase::class.java, AppConstant.APP_DB_NAME).build()
+            Room.databaseBuilder(context, AppDatabase::class.java, AppConstant.APP_DB_NAME)
+                    .allowMainThreadQueries()
+                    .build()
 
     @Provides
     @Singleton

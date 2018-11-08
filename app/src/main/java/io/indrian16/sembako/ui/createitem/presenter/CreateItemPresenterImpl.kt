@@ -1,5 +1,7 @@
 package io.indrian16.sembako.ui.createitem.presenter
 
+import io.indrian16.sembako.database.repository.sembako.Sembako
+import io.indrian16.sembako.database.repository.sembako.SembakoRepository
 import io.indrian16.sembako.ui.createitem.view.CreateItemView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -8,7 +10,8 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class CreateItemPresenterImpl @Inject constructor(private val view: CreateItemView) : CreateItemPresenter {
+class CreateItemPresenterImpl @Inject constructor(private val view: CreateItemView,
+                                                  private val repository: SembakoRepository) : CreateItemPresenter {
 
     companion object {
 
@@ -16,6 +19,11 @@ class CreateItemPresenterImpl @Inject constructor(private val view: CreateItemVi
     }
 
     private lateinit var disposable: Disposable
+
+    override fun insertItem(sembako: Sembako) {
+
+        repository.insertSembako(sembako)
+    }
 
     override fun startValidation() {
 

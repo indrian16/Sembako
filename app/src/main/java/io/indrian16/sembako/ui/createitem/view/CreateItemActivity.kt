@@ -7,10 +7,12 @@ import android.widget.EditText
 import android.widget.Toast
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.indrian16.sembako.R
+import io.indrian16.sembako.database.repository.sembako.Sembako
 import io.indrian16.sembako.ui.base.view.BaseActivity
 import io.indrian16.sembako.ui.createitem.presenter.CreateItemPresenter
 import io.indrian16.sembako.util.CommonUtil
 import io.reactivex.Observable
+import java.util.*
 import javax.inject.Inject
 
 class CreateItemActivity : BaseActivity(), CreateItemView {
@@ -52,10 +54,24 @@ class CreateItemActivity : BaseActivity(), CreateItemView {
         mStockTIL = findViewById(R.id.til_stock)
 
         mCreateProduct = findViewById(R.id.btn_create)
-        mCreateProduct.setOnClickListener {
+        mCreateProduct.setOnClickListener { createItem() }
+    }
 
-            Toast.makeText(baseContext, "Dummy", Toast.LENGTH_LONG).show()
-        }
+    private fun createItem() {
+
+        val sembako = Sembako()
+        sembako.barcode = mBarcode.fastEdtToInt()
+        sembako.title = mTitle.text.toString()
+        sembako.price = mPrice.fastEdtToInt()
+        sembako.stock = mStock.fastEdtToInt()
+
+        presenter.insertItem(sembako)
+
+    }
+
+    private fun EditText.fastEdtToInt(): Int {
+
+        return Integer.parseInt(this.text.toString())
     }
 
     override fun barcodeChange(): Observable<CharSequence> = mBarcode.textChanges()

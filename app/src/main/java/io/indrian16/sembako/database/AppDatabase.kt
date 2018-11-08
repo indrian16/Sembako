@@ -6,7 +6,6 @@ import android.arch.persistence.room.TypeConverters
 import io.indrian16.sembako.database.repository.sembako.Sembako
 import io.indrian16.sembako.database.repository.sembako.SembakoDAO
 import io.indrian16.sembako.util.AppConstant
-import io.indrian16.sembako.util.Converters
 
 @Database(entities = [Sembako::class], version = AppConstant.APP_DB_VER)
 @TypeConverters(Converters::class)

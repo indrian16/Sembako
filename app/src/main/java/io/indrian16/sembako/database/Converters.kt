@@ -1,4 +1,4 @@
-package io.indrian16.sembako.util
+package io.indrian16.sembako.database
 
 import android.arch.persistence.room.TypeConverter
 import java.util.*
@@ -6,14 +6,12 @@ import java.util.*
 class Converters {
 
     @TypeConverter
-    fun fromTimestamp(value: Long): Date? {
-
-        return if (value == null) null else Date(value)
+    fun fromTimestamp(value: Long?): Date? {
+        return value?.let { Date(it) }
     }
 
     @TypeConverter
     fun dateToTimestamp(date: Date?): Long? {
-
         return date?.time
     }
 }

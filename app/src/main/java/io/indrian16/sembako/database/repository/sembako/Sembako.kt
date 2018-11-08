@@ -13,21 +13,20 @@ data class Sembako(
         var id: Long? = null,
 
         @ColumnInfo(name = "barcode")
-        var barcode: Int? = null,
+        var barcode: Int = 0,
 
         @ColumnInfo(name = "title")
-        var title: String? = null,
+        var title: String = "",
 
         @ColumnInfo(name = "price")
-        var price: Int? = null,
+        var price: Int = 0,
 
         @ColumnInfo(name = "stock")
-        var stock: Int? = null,
+        var stock: Int = 0,
 
         @ColumnInfo(name = "create_at")
-        var createdAt: Date? = null,
+        var createdAt: Date? = Date(),
 
         @ColumnInfo(name = "update_at")
-        var updateAt: Date? = null
-
+        var updateAt: Date? = Date()
 )

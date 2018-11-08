@@ -29,7 +29,7 @@ class HomePresenterImpl @Inject constructor(private val view: HomeView,
                                 view.sembakoNoItem()
                             }
                         },
-                        {error -> view.showError(error)}
+                        { error -> view.showError(error) }
                 )
     }
 
